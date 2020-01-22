@@ -41,6 +41,15 @@ public class AppUnitTest {
 	}
 	
 	@Test
+	public void getLongestWord_SpaceInput() {
+		App appClass = new App();
+		LongestWord longestWord = new LongestWord();
+		longestWord = appClass.getLongestWord(" ");
+		assertEquals(0, longestWord.getLongestwordLength(), "The longest word should be length 0");
+		assertEquals("", longestWord.getLongestword(), "The longest word should be empty");
+	}
+	
+	@Test
 	public void getLongestWord_OneWordInSentence() {
 		App appClass = new App();
 		LongestWord longestWord = new LongestWord();
@@ -127,8 +136,8 @@ public class AppUnitTest {
 	public void getLongestWord_SpecialBetweenWords() {
 		App appClass = new App();
 		LongestWord longestWord = new LongestWord();
-		longestWord = appClass.getLongestWord("cow>jumped?over*Origination");
-		assertEquals(11, longestWord.getLongestwordLength(), "The longest word should be length 6");
+		longestWord = appClass.getLongestWord("cow>jumped^over*Origination");
+		assertEquals(11, longestWord.getLongestwordLength(), "The longest word should be length 11");
 		assertEquals("Origination", longestWord.getLongestword(), "The longest word should be 'Origination'");
 	}
 	
@@ -136,7 +145,7 @@ public class AppUnitTest {
 	public void getLongestWord_SpecialCharacter_LeadingAndTrailingEmptySpace_Numbers() {
 		App appClass = new App();
 		LongestWord longestWord = new LongestWord();
-		longestWord = appClass.getLongestWord(" “The cow>jumped?over_the!moon> 8976. ");
+		longestWord = appClass.getLongestWord(" “The cow>jumped^over_the%moon> 8976. ");
 		assertEquals(6, longestWord.getLongestwordLength(), "The longest word should be length 6");
 		assertEquals("jumped", longestWord.getLongestword(), "The longest word should be 'jumped'");
 	}
@@ -148,5 +157,68 @@ public class AppUnitTest {
 		longestWord = appClass.getLongestWord("The cow jumped over the moon.");
 		assertEquals(6, longestWord.getLongestwordLength(), "The longest word should be length 6");
 		assertEquals("jumped", longestWord.getLongestword(), "The longest word should be 'jumped'");
+	}
+	
+	@Test
+	public void getLongestWord_WordsWithPunctuation() {
+		App appClass = new App();
+		LongestWord longestWord = new LongestWord();
+		longestWord = appClass.getLongestWord("They've done the work at the office");
+		assertEquals(6, longestWord.getLongestwordLength(), "The longest word should be length 6");
+		assertEquals("They've", longestWord.getLongestword(), "The longest word should be 'They've'");
+	}
+	
+	@Test
+	public void getLongestWord_WordsWithPunctuation_LongestHasNoPunctuation() {
+		App appClass = new App();
+		LongestWord longestWord = new LongestWord();
+		longestWord = appClass.getLongestWord("They've done the work at the offices");
+		assertEquals(7, longestWord.getLongestwordLength(), "The longest word should be length 7");
+		assertEquals("offices", longestWord.getLongestword(), "The longest word should be 'offices'");
+	}
+	
+	@Test
+	public void getLongestWord_WordsWithMorePunctuation() {
+		App appClass = new App();
+		LongestWord longestWord = new LongestWord();
+		longestWord = appClass.getLongestWord("They'''''''ve done the work at the offices");
+		assertEquals(7, longestWord.getLongestwordLength(), "The longest word should be length 7");
+		assertEquals("offices", longestWord.getLongestword(), "The longest word should be 'offices'");
+	}
+	
+	@Test
+	public void getLongestWord_WordsWithSemicolon() {
+		App appClass = new App();
+		LongestWord longestWord = new LongestWord();
+		longestWord = appClass.getLongestWord("This is my words: I get it.");
+		assertEquals(5, longestWord.getLongestwordLength(), "The longest word should be length 5");
+		assertEquals("words", longestWord.getLongestword(), "The longest word should be 'words'");
+	}
+	
+	@Test
+	public void getLongestWord_WordsWithMoreDots() {
+		App appClass = new App();
+		LongestWord longestWord = new LongestWord();
+		longestWord = appClass.getLongestWord("This is my words: I get it......");
+		assertEquals(5, longestWord.getLongestwordLength(), "The longest word should be length 5");
+		assertEquals("words", longestWord.getLongestword(), "The longest word should be 'words'");
+	}
+	
+	@Test
+	public void getLongestWord_OnlyQuote() {
+		App appClass = new App();
+		LongestWord longestWord = new LongestWord();
+		longestWord = appClass.getLongestWord("''''''");
+		assertEquals(0, longestWord.getLongestwordLength(), "The longest word should be length 0");
+		assertEquals("", longestWord.getLongestword(), "The longest word should be empty");
+	}
+	
+	@Test
+	public void getLongestWord_TheWordsWithHyphen() {
+		App appClass = new App();
+		LongestWord longestWord = new LongestWord();
+		longestWord = appClass.getLongestWord("There was a build-up of traffic on the ring road.");
+		assertEquals(7, longestWord.getLongestwordLength(), "The longest word should be length 7");
+		assertEquals("traffic", longestWord.getLongestword(), "The longest word should be 'traffic'");
 	}
 }

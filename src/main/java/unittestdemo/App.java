@@ -10,12 +10,13 @@ public class App {
 			newWord.setLongestwordLength(0);
 			return newWord;
 		}
-		String [] wordArray = sentence.replaceAll("[^a-zA-Z0-9]", " ").trim().split(" ");
+		String [] wordArray = sentence.replaceAll("[^a-zA-Z0-9']", " ").trim().split(" ");
 		int longest = 0;
 		String longestWord = "";
 		for(String word : wordArray ) {
-			if(word.length() > longest) {
-				longest = word.length();
+			String tempWord = word.replaceAll("[^a-zA-Z0-9]", "");
+			if(tempWord.length() > longest) {
+				longest = tempWord.length();
 				longestWord = word;
 			}
 		}
