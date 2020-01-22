@@ -11,7 +11,7 @@ Assumption 4: if the input has two or more words which are the longest word, ret
 
 Assumption 5: if the special character is between two words, ex. I#have, this should be treated as two words 'I' and 'have'. Ex. "power-driven", treated as two words, "power" and "driven"
 
-Assumption 6: longest word accepts "'" as the only one punctuation can be printed. If the words have "'" between it, it should be treated as on word. If the longest word contains "'", the return word should contain this punctuation, and length should not contain it. Ex, "I've", the longest word should be "I've", the length should be 3. 
+Assumption 6: longest word accepts "'" as the only one punctuation can be printed. If the words have "'" between it, it should be treated as one word. If the longest word contains "'", the return word should contain this punctuation, and length should not contain it. Ex, "I've", the longest word should be "I've", the length should be 3. 
 
 Assumption 7: if the longest word is like "''''''''", which only contains quote, this is not treated as valid word, should return empty string and the length is 0.
 
